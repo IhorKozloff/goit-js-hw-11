@@ -1,48 +1,40 @@
 import './css/styles.css';
 import imgSample from './sample'
-const PIXABAY_API_KEY = 'key=25226390-6524195878b00f535edfb636d';
-const URL = 'https://pixabay.com/api/';
+import imageFinder from './myAPIService'
+
+
+
 const refs = {
     formEl: document.querySelector('.search-form'),
     btnEl: document.querySelector('button'),
     galleryEl: document.querySelector('.gallery'),
+    loadMoreBtnEl: document.querySelector('.load-more'),
 }
 console.log(refs.galleryEl)
-// webformatURL - ссылка на маленькое изображение для списка карточек.
+
 // largeImageURL - ссылка на большое изображение.
-// tags - строка с описанием изображения. Подойдет для атрибута alt.
-// likes - количество лайков.
-// views - количество просмотров.
-// comments - количество комментариев.
-// downloads - количество загрузок.
+
+const imageAPI = new imageFinder;
 
 
 
-function getServer (searchRequest) {
-    const searchTerm = `q=${searchRequest}`;
-    const imageType = `image_type=photo`;
-    const orientation = `orientation=horizontal`;
-    const safesearch = `safesearch=true`;
 
- return fetch(`${URL}?${PIXABAY_API_KEY}&${searchTerm}&${imageType}&${orientation}&${safesearch}`).then(response => {
-    return response.json();
- }).then(result => {
-    return result.hits;
-});
- };
-
- function frontEndMAker (workFront) {
-    refs.galleryEl.insertAdjacentHTML('beforeend', imgSample(workFront));
-    console.log(workFront)
+ function frontEndMAker (murkUp) {
+    refs.galleryEl.insertAdjacentHTML('beforeend', imgSample(murkUp));
+    console.log(murkUp)
  };
 
 
 
 function onSubmitForm (event) {
     event.preventDefault();
-
-    const userSearchRequest = event.target.elements.searchQuery.value
-
-    getServer(userSearchRequest).then(frontEndMAker);
+    refs.galleryEl.innerHTML = '';
+    imageAPI.userRequestValue = event.target.elements.searchQuery.value;
+    imageAPI.searchRequest().then(frontEndMAker);
+    refs.loadMoreBtnEl.classList.add('active');
+};
+function onLoadMoreBtn () {
+    imageAPI.loadMore().then(frontEndMAker);
 };
 refs.formEl.addEventListener('submit', onSubmitForm);
+refs.loadMoreBtnEl.addEventListener('click', onLoadMoreBtn)

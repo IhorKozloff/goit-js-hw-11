@@ -38,7 +38,7 @@ input {
   outline: none;
   
 }
-button {
+.search-btn {
  position: absolute;
  right: 0;
  top: 0;
@@ -52,15 +52,16 @@ button {
   fill: rgb(96, 100, 100);
   transition: fill cubic-bezier(0.075, 0.82, 0.165, 1) 500ms, transform cubic-bezier(0.075, 0.82, 0.165, 1) 500ms;
 }
-button:hover .btn-icon {
+.search-btn:hover .btn-icon {
   transform: scale(1.3);
   fill: #000;
 }
-button:hover {
+.search-btn:hover {
   background-color: rgb(226, 221, 221);
+  cursor: pointer;
 }
 
-button:active .btn-icon {
+.search-btn:active .btn-icon {
   transform: scale(1);
   fill: #000;
 }
@@ -70,15 +71,20 @@ input:focus {
   box-shadow: 0px 100px 80px rgba(0, 0, 0, 0.02), 0px 64.8148px 46.8519px rgba(0, 0, 0, 0.0151852), 0px 38.5185px 25.4815px rgba(0, 0, 0, 0.0121481), 
   0px 20px 13px rgba(0, 0, 0, 0.01), 0px 8.14815px 6.51852px rgba(0, 0, 0, 0.00785185), 0px 1.85185px 3.14815px rgba(0, 0, 0, 0.00481481)
 }
-
+.gallery-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .gallery {
   display: flex;
   flex-flow: row wrap;
   margin-right: -20px;
 }
 .photo-card {
-margin-right: 20px;
-margin-bottom: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
 }
 .photo-card img{
   width: 300px;
@@ -87,4 +93,19 @@ margin-bottom: 20px;
 .info {
   display: flex;
   justify-content: space-between;
+}
+.load-more {
+  opacity: 0;
+}
+.load-more.active {
+  width: 150px;
+  height: 40px;
+  border: 1px solid #fff;
+  background-color: rgb(253, 222, 48);
+  border-radius: 10px;
+  cursor: pointer;
+  opacity: 1;
+}
+.load-more.active:hover {
+  border-color: #000;
 }
