@@ -6,7 +6,7 @@ import imgSample from './templates/sample'
 import imageFinder from './myAPIService'
 
 
-const lightbox = new SimpleLightbox('.gallery a', { close: "true" });
+const lightbox = new SimpleLightbox('.gallery a');
 
 const refs = {
     formEl: document.querySelector('.search-form'),
@@ -18,18 +18,16 @@ const refs = {
 }
 console.log(refs.galleryEl)
 
-// largeImageURL - ссылка на большое изображение.
-const timeOut = 0;
+
 const imageAPI = new imageFinder;
 
 
-
-
- function frontEndMAker (dataToMurkUp) {
+function frontEndMAker (dataToMurkUp) {
      
     refs.galleryEl.insertAdjacentHTML('beforeend', imgSample(dataToMurkUp));
+    lightbox.refresh();
 
- };
+};
 
 
 
@@ -42,29 +40,31 @@ function onSubmitForm (event) {
     imageAPI.searchRequest().then(searchResult => {
 
        const {itemArr, totalItem} = searchResult;
-  
+
         if (itemArr.length === 0) {
             throw new Error();
         }
+
         
         Notiflix.Notify.success(`Hooray! We found ${totalItem} images.`);
 
         frontEndMAker(itemArr);
-
+     
         refs.loadMoreBtnEl.classList.add('active');
 
     }).catch(onSearchError);
     
 };
+
 function onLoadMoreBtn () {
     imageAPI.loadMore().then(onMoresearchResult => {
 
-  
         if (onMoresearchResult.length === 0) {
             throw new Error();
         };
 
         frontEndMAker(onMoresearchResult);
+       
     }).catch(inTheEeeeeeend);
 };
 

@@ -112,11 +112,8 @@ input:focus {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
-  /* margin-right: -20px; */
 }
-/* .photo-card {
-    margin-bottom: 20px;
-} */
+
 .web-url-img{
   width: 340px;
   height: 240px;
