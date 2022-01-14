@@ -7,6 +7,7 @@ import imageFinder from './myAPIService'
 
 
 const lightbox = new SimpleLightbox('.gallery a');
+const imageAPI = new imageFinder;
 
 const refs = {
     formEl: document.querySelector('.search-form'),
@@ -16,10 +17,8 @@ const refs = {
     gallerySectionEl: document.querySelector('.gallery-section'),
     scrollEl: document.querySelector('.back-home-btn'),
 }
-console.log(refs.galleryEl)
 
 
-const imageAPI = new imageFinder;
 
 
 function frontEndMAker (dataToMurkUp) {
@@ -82,22 +81,36 @@ function inTheEeeeeeend () {
     refs.loadMoreBtnEl.classList.remove('active');
 };
 
+
+
+
+
+function trackScroll() {
+    const scrolled = window.pageYOffset;
+    const coords = document.documentElement.clientHeight;
+
+    if (scrolled > coords) {
+        refs.scrollEl.classList.add('active');
+    }
+    if (scrolled < coords) {
+        refs.scrollEl.classList.remove('active');
+    }
+}
+
+function backToTop() {
+    if (window.pageYOffset > 0) {
+      window.scrollBy(0, -80);
+      setTimeout(backToTop, 0);
+    }
+}
+
+
+
 refs.formEl.addEventListener('submit', onSubmitForm);
 refs.loadMoreBtnEl.addEventListener('click', onLoadMoreBtn)
+window.addEventListener('scroll', trackScroll);
+refs.scrollEl.addEventListener('click', backToTop);
 
 
-window.onscroll = function () {
-    
-    if (document.body.scrollTop > document.documentElement.clientHeight) {
-        refs.scrollEl.style.opacity = "0";
-    } else {
-        refs.scrollEl.style.opacity = "1";
-    }
-    
-};
-function goUp () {
-    const top = Math.max(document.body.scrollTop, document.documentElement.scrollTop);
-    if (top > 0) {
-        window.scrollBy(0, -100);
-    }
-};
+
+

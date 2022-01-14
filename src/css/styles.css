@@ -46,6 +46,9 @@ header {
   opacity: 0;
   transition: opacity ease 2s;
 }
+.back-home-btn.active {
+  opacity: 1;
+}
 .search-form {
   display: flex;
   justify-content: center;
@@ -124,14 +127,17 @@ input:focus {
 }
 .load-more {
   opacity: 0;
-}
-.load-more.active {
   width: 150px;
   height: 40px;
   border: 1px solid #fff;
   background-color: rgb(253, 222, 48);
   border-radius: 10px;
   cursor: pointer;
+  transition: opacity ease 3s;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+.load-more.active {
   opacity: 1;
 }
 .load-more.active:hover {
