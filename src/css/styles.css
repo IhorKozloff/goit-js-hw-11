@@ -44,7 +44,7 @@ header {
   cursor: pointer;
 }
 .header-icon:hover {
-fill: rgb(0, 0, 0);
+  fill: rgb(0, 0, 0);
 }
 .header-text {
   position: absolute;
@@ -78,10 +78,14 @@ fill: rgb(0, 0, 0);
   bottom: 50px;
   right: 50px;
   opacity: 0;
-  transition: opacity ease 2s;
+  transition: opacity ease 500ms, background-color ease 500ms;
+}
+.back-home-btn:hover {
+  background-color: rgb(216, 177, 1);
 }
 .back-home-btn.active {
   opacity: 1;
+  transition: opacity ease 500ms;
 }
 .search-form {
   display: flex;
@@ -99,9 +103,9 @@ input {
   outline: none;
 }
 .search-btn {
- position: absolute;
- right: 0;
- top: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
   width: 40px;
   height: 40px;
   border-radius: 5px;

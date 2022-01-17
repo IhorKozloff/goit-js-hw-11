@@ -8,7 +8,8 @@ export default class ImageAPIService {
         this.orientation = `orientation=horizontal`;
         this.safesearch = `safesearch=true`;
         this.indexOfPage = 1;
-        this.userSearchRequest = 1;
+        this.userSearchRequest = "";
+        this.pictureRequest = `q=${this.userSearchRequest}`;
         
     }
         
@@ -17,7 +18,7 @@ export default class ImageAPIService {
         this.indexOfPage = 1;  
         
         try {
-            const response = await axios.get(`${URL}?${PIXABAY_API_KEY}&q=${this.userSearchRequest}&${this.imageType}&${this.orientation}&${this.safesearch}&per_page=40&page=${this.indexOfPage}`);               
+            const response = await axios.get(`${URL}?${PIXABAY_API_KEY}&${this.pictureRequest}&${this.imageType}&${this.orientation}&${this.safesearch}&per_page=40&page=${this.indexOfPage}`);               
                 
             const resultData = {
                 itemArr: response.data.hits, 
@@ -39,7 +40,7 @@ export default class ImageAPIService {
         this.indexOfPage += 1;         
         
         try {
-            const response = await axios.get(`${URL}?${PIXABAY_API_KEY}&q=${this.userSearchRequest}&${this.imageType}&${this.orientation}&${this.safesearch}&per_page=40&page=${this.indexOfPage}`);               
+            const response = await axios.get(`${URL}?${PIXABAY_API_KEY}&${this.pictureRequest}&${this.imageType}&${this.orientation}&${this.safesearch}&per_page=40&page=${this.indexOfPage}`);               
               
             return response.data.hits;  
         } 
