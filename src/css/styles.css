@@ -33,6 +33,40 @@ header {
   background-color: rgb(255, 208, 0);
 
 }
+.header-icon {
+  position: absolute;
+  top: 0;
+  left: 50px;
+  transform: translateY(40%);
+  fill: rgb(49, 5, 247);
+  z-index: 1;
+  transition: all ease 1s;
+  cursor: pointer;
+}
+.header-icon:hover {
+fill: rgb(0, 0, 0);
+}
+.header-text {
+  position: absolute;
+  top: -10px;
+  left: 300px; 
+  font-weight: 900;
+}
+.header-img {
+  width: 350px;
+  height: 100px;
+  position: absolute;
+  right: 50px;
+  top: -1px;
+}
+.header-decore-img {
+  position: absolute;
+  top: 35px;
+  left: 50px;
+  z-index: 0; 
+  width: 300px;
+  height: 10px;
+}
 .back-home-btn {
   width: 60px;
   height: 60px;
@@ -54,6 +88,7 @@ header {
   justify-content: center;
   align-items: center;
   position: relative;
+  z-index: 10;
 }
 input {
   font: inherit;
@@ -133,12 +168,13 @@ input:focus {
   background-color: rgb(253, 222, 48);
   border-radius: 10px;
   cursor: pointer;
-  transition: opacity ease 3s;
+  
   margin-top: 20px;
   margin-bottom: 50px;
 }
 .load-more.active {
   opacity: 1;
+  transition: opacity ease 3s;
 }
 .load-more.active:hover {
   border-color: #000;

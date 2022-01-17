@@ -1,6 +1,6 @@
 const PIXABAY_API_KEY = 'key=25226390-6524195878b00f535edfb636d';
 const URL = 'https://pixabay.com/api/';
-
+const axios = require('axios').default;
 export default class ImageAPIService {
     constructor () {
         
@@ -12,36 +12,41 @@ export default class ImageAPIService {
         
     }
         
-    searchRequest () {
+    async searchRequest () {
 
         this.indexOfPage = 1;  
-
-        return fetch(`${URL}?${PIXABAY_API_KEY}&q=${this.userSearchRequest}&${this.imageType}&${this.orientation}&${this.safesearch}&per_page=40&page=${this.indexOfPage}`).then(response => {
-            return response.json();
-        }).then(result => {
-            
+        
+        try {
+            const response = await axios.get(`${URL}?${PIXABAY_API_KEY}&q=${this.userSearchRequest}&${this.imageType}&${this.orientation}&${this.safesearch}&per_page=40&page=${this.indexOfPage}`);               
+                
             const resultData = {
-                itemArr: result.hits, 
-                totalItem: result.totalHits,
-            };
-            
+                itemArr: response.data.hits, 
+                totalItem: response.data.totalHits,
+            }; 
             return resultData;
-        });
-
+        
+            
+        } 
+        catch (error) {
+            console.error(error);
+            return error
+        } 
 
     };
 
-    loadMore () {
+    async loadMore () {
 
-        this.indexOfPage += 1;  
-
-        return fetch(`${URL}?${PIXABAY_API_KEY}&q=${this.userSearchRequest}&${this.imageType}&${this.orientation}&${this.safesearch}&per_page=40&page=${this.indexOfPage}`).then(response => {
-            return response.json();
-        }).then(result => {
-            
-            return result.hits;
-        });
+        this.indexOfPage += 1;         
         
+        try {
+            const response = await axios.get(`${URL}?${PIXABAY_API_KEY}&q=${this.userSearchRequest}&${this.imageType}&${this.orientation}&${this.safesearch}&per_page=40&page=${this.indexOfPage}`);               
+              
+            return response.data.hits;  
+        } 
+        catch (error) {
+            return error
+        }
+
     }
     
     get userRequestValue() {

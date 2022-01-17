@@ -18,9 +18,6 @@ const refs = {
     scrollEl: document.querySelector('.back-home-btn'),
 }
 
-
-
-
 function frontEndMAker (dataToMurkUp) {
      
     refs.galleryEl.insertAdjacentHTML('beforeend', imgSample(dataToMurkUp));
@@ -29,43 +26,56 @@ function frontEndMAker (dataToMurkUp) {
 };
 
 
-
-function onSubmitForm (event) {
+async function onSubmitForm (event) {
     event.preventDefault();
     refs.gallerySectionEl.classList.remove('error');
     refs.galleryEl.innerHTML = '';
+
     imageAPI.userRequestValue = event.target.elements.searchQuery.value;
 
-    imageAPI.searchRequest().then(searchResult => {
-
-       const {itemArr, totalItem} = searchResult;
+    try { 
+        const responseFromApi = await imageAPI.searchRequest()
+        
+        const {itemArr, totalItem} = responseFromApi;    
 
         if (itemArr.length === 0) {
-            throw new Error();
-        }
+                throw new Error();
+            }
 
-        
         Notiflix.Notify.success(`Hooray! We found ${totalItem} images.`);
-
         frontEndMAker(itemArr);
-     
         refs.loadMoreBtnEl.classList.add('active');
 
-    }).catch(onSearchError);
+    } catch {
+        onSearchError();
+    }
+
+};
+
+async function onLoadMoreBtn () {
+
+    try { 
+        const responseFromApi = await imageAPI.loadMore()      
+
+
+        if (responseFromApi.length === 0) {
+                throw new Error();
+            }
+
+        frontEndMAker(responseFromApi);
+        
+    } catch {
+        inTheEeeeeeend();
+    }
     
 };
 
-function onLoadMoreBtn () {
-    imageAPI.loadMore().then(onMoresearchResult => {
 
-        if (onMoresearchResult.length === 0) {
-            throw new Error();
-        };
 
-        frontEndMAker(onMoresearchResult);
-       
-    }).catch(inTheEeeeeeend);
-};
+
+
+
+
 
 
 
