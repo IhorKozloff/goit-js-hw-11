@@ -169,7 +169,7 @@ input:focus {
   width: 150px;
   height: 40px;
   border: 1px solid #fff;
-  background-color: rgb(253, 222, 48);
+  background-color: rgb(255, 208, 0.7);
   border-radius: 10px;
   cursor: pointer;
   
@@ -181,5 +181,6 @@ input:focus {
   transition: opacity ease 3s;
 }
 .load-more.active:hover {
-  border-color: #000;
+  background-color: rgb(216, 177, 1);
+
 }
