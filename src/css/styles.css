@@ -34,17 +34,19 @@ header {
 
 }
 .header-icon {
+  display: block;
   position: absolute;
-  top: 0;
+  font-size: 36px;
+  font-weight: bolder;
+  top: -63px;
   left: 50px;
   transform: translateY(40%);
-  fill: rgb(49, 5, 247);
   z-index: 1;
-  transition: all ease 1s;
+  transition: all ease 500ms;
   cursor: pointer;
 }
 .header-icon:hover {
-  fill: rgb(0, 0, 0);
+  color: #fff;
 }
 .header-text {
   position: absolute;
@@ -97,7 +99,7 @@ header {
 input {
   font: inherit;
   padding: 8px;
-  width: 50vw;
+  width: 45vw;
   border: none;
   border-radius: 5px;
   outline: none;
